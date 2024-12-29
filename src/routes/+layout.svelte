@@ -5,7 +5,7 @@
 
 <main>
 <body>
-<div class="headerContainer">    
+ 
     
     <div class="header">
         <a href="/"> <img src="../CosmicLogo.png" alt="cosmic logo" style="height: 8em; width: auto;"></a>
@@ -18,13 +18,13 @@
         </div>
 
         <div class="navButtonsContainer">
-            <a href="/profile" > <Icon icon="material-symbols:rocket-rounded" width="2.2em" height="2.2em" color ="rgb(225, 225, 225);" /></a>
-            <a href="/cart" ><Icon icon="mdi:cart" width="2em" height="2em" color = "rgb(225, 225, 225);"/></a>
+            <a href="/profile" > <Icon icon="material-symbols:rocket-rounded" width="2.2em" height="2.2em" color ="red" /></a>
+            <a href="/cart" ><Icon icon="mdi:cart" width="2em" height="2em" color = "red;"/></a>
 
         </div>
     </div>
 
-<div/>   
+ 
     <div class="content">
         <slot />
 
@@ -46,9 +46,8 @@
 
     }
 
-    .headerContainer {
-        background: rgb(32,32,32);
-        background: linear-gradient(180deg, rgba(32,32,32,1) 60%, rgba(225,225,225,1) 60%); 
+    body {
+        background-color: #002f52;
     }
 
     .header {
@@ -106,11 +105,11 @@
         color: black;
         background-color:rgb(225, 225, 225);
         width: 10%;
-        padding: 2px 2px;
+        padding: 2px;
         margin-left: 5px;
         box-shadow: 0 4px 0 red, 2px 12px 10px transparent;
 		transform: translate(0, -4px);
-		transition: all 0.01s;
+		transition: all 0.02s;
 
     }
 
