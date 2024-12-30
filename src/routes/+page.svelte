@@ -266,13 +266,17 @@
 
         display: grid;
         grid-template-columns: auto auto auto auto;
-        gap: 1em 2em;
+        row-gap: 4em;
+        column-gap: 4em;
 
     }
 
     .mainContent .productContainer {
-        min-height: 10em;
-        min-width: 8em;
+        min-height: 18em;
+        min-width: 15em;
+
+        width: fit-content;
+        
 
     }
 
@@ -283,8 +287,8 @@
         min-width: 15em;
         min-height: 15em;   
 
-        width: 20em;
-        height: 20em;
+        width: 18em;
+        height: 18em;
 
         border-radius: 10px;
 

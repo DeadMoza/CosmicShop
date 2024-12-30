@@ -47,7 +47,7 @@
     }
 
     body {
-        background-color: #002f52;
+        background-color: #202020;
     }
 
     .header {
