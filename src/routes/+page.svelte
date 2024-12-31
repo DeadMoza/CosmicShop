@@ -1,5 +1,9 @@
 <script>
-
+    export let data; 
+    function shlal() {
+        console.log(data.products);
+    }
+    
 </script>
 
 <main>
@@ -25,178 +29,21 @@
     </div>
     
     <div class="mainContent">
+        {#each data.products as product}
+
+        <div class="productContainer">
+            <div class="productImage">
+
+            </div>
+            <h2>{product.name}</h2>
+            <span class="priceAndCart">
+                <h3>{product.price} LYD</h3>
+                <button on:click={shlal}>Add To Cart</button>
+            </span>
+        </div>
+        {/each}
+
         
-
-        <div class="productContainer">
-            <div class="productImage">
-
-            </div>
-            <h2>Product Name</h2>
-            <span class="priceAndCart">
-                <h3>250 LYD</h3>
-                <button>Add To Cart</button>
-            </span>
-        </div>
-
-        <div class="productContainer">
-            <div class="productImage">
-
-            </div>
-            <h2>Product Name</h2>
-            <span class="priceAndCart">
-                <h3>250 LYD</h3>
-                <button>Add To Cart</button>
-            </span>
-        </div>
-
-        <div class="productContainer">
-            <div class="productImage">
-
-            </div>
-            <h2>Product Name</h2>
-            <span class="priceAndCart">
-                <h3>250 LYD</h3>
-                <button>Add To Cart</button>
-            </span>
-        </div>
-
-
-        <div class="productContainer">
-            <div class="productImage">
-
-            </div>
-            <h2>Product Name</h2>
-            <span class="priceAndCart">
-                <h3>250 LYD</h3>
-                <button>Add To Cart</button>
-            </span>
-        </div>
-
-
-        <div class="productContainer">
-            <div class="productImage">
-
-            </div>
-            <h2>Product Name</h2>
-            <span class="priceAndCart">
-                <h3>250 LYD</h3>
-                <button>Add To Cart</button>
-            </span>
-        </div>
-
-
-        <div class="productContainer">
-            <div class="productImage">
-
-            </div>
-            <h2>Product Name</h2>
-            <span class="priceAndCart">
-                <h3>250 LYD</h3>
-                <button>Add To Cart</button>
-            </span>
-        </div>
-
-
-        <div class="productContainer">
-            <div class="productImage">
-
-            </div>
-            <h2>Product Name</h2>
-            <span class="priceAndCart">
-                <h3>250 LYD</h3>
-                <button>Add To Cart</button>
-            </span>
-        </div>
-
-
-        <div class="productContainer">
-            <div class="productImage">
-
-            </div>
-            <h2>Product Name</h2>
-            <span class="priceAndCart">
-                <h3>250 LYD</h3>
-                <button>Add To Cart</button>
-            </span>
-        </div>
-
-
-
-        <div class="productContainer">
-            <div class="productImage">
-
-            </div>
-            <h2>Product Name</h2>
-            <span class="priceAndCart">
-                <h3>250 LYD</h3>
-                <button>Add To Cart</button>
-            </span>
-        </div>
-
-
-
-        <div class="productContainer">
-            <div class="productImage">
-
-            </div>
-            <h2>Product Name</h2>
-            <span class="priceAndCart">
-                <h3>250 LYD</h3>
-                <button>Add To Cart</button>
-            </span>
-        </div>
-
-
-
-        <div class="productContainer">
-            <div class="productImage">
-
-            </div>
-            <h2>Product Name</h2>
-            <span class="priceAndCart">
-                <h3>250 LYD</h3>
-                <button>Add To Cart</button>
-            </span>
-        </div>
-
-
-
-        <div class="productContainer">
-            <div class="productImage">
-
-            </div>
-            <h2>Product Name</h2>
-            <span class="priceAndCart">
-                <h3>250 LYD</h3>
-                <button>Add To Cart</button>
-            </span>
-        </div>
-
-
-        <div class="productContainer">
-            <div class="productImage">
-
-            </div>
-            <h2>Product Name</h2>
-            <span class="priceAndCart">
-                <h3>250 LYD</h3>
-                <button>Add To Cart</button>
-            </span>
-        </div>
-
-
-        <div class="productContainer">
-            <div class="productImage">
-
-            </div>
-            <h2>Product Name</h2>
-            <span class="priceAndCart">
-                <h3>250 LYD</h3>
-                <button>Add To Cart</button>
-            </span>
-        </div>
-
-
         
 
     </div>
