@@ -1,9 +1,9 @@
 <script>
     export let data; 
-    function shlal() {
+    function shlal(){
         console.log(data.products);
+
     }
-    
 </script>
 
 <main>
@@ -33,7 +33,7 @@
 
         <div class="productContainer">
             <div class="productImage">
-
+                <img src={product.imageUrls[0]} alt="idk">
             </div>
             <h2>{product.name}</h2>
             <span class="priceAndCart">
@@ -171,6 +171,12 @@
 
     }
     
+    img {
+        height: 100%;
+        width: 100%;
+
+        object-fit: contain
+    }
 
 
 </style>
