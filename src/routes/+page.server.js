@@ -1,8 +1,5 @@
-import { db, storage } from "$lib/firebase";
-
-import { db, storage } from "$lib/firebase";
+import { db } from "$lib/firebase";
 import { collection, getDocs } from "firebase/firestore";
-import { ref, getDownloadURL } from "firebase/storage";
 
 export async function load() {
     const snapshot = await getDocs(collection(db, 'products'));
@@ -16,23 +13,14 @@ export async function load() {
         snapshot.docs.map(async (doc) => {
             const data = doc.data();
 
-            // Fetch URLs for all images in the `imageName` array
-            const imageUrls = await Promise.all(
-                (data.images || []).map(async (images) => {
-                    const imagePath = `products/${data.name}/${images}`;
-                    
-                    return await getDownloadURL(ref(storage, imagePath)); // Handle missing images
-                })
-            );
-
             return {
                 id: doc.id,
                 ...data,
-                imageUrls: imageUrls.filter(url => url !== null), // Filter out failed URLs
             };
         })
     );
 
+    console.log(products);
     return { products };
 }
 

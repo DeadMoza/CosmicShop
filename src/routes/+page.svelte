@@ -1,5 +1,8 @@
 <script>
-    export let data; 
+    import Icon from '@iconify/svelte';
+    export let data;
+    let allProducts = data.products;
+
     function shlal(){
         console.log(data.products);
 
@@ -8,6 +11,28 @@
 
 <main>
 <body>
+    <div class="header">
+        <a href="/"> <img src="../CosmicLogo.png" alt="cosmic logo" style="height: 8em; width: auto;"></a>
+
+        <div class="searchBarContainer">
+            <label for="searchBar" id="searchIcon"> <Icon icon="material-symbols:search-rounded" width="24" height="24" /></label>
+            <input type="search" name="searchBar" id="searchBar">
+            <button class ="searchButton"><Icon icon="material-symbols:subdirectory-arrow-right-rounded" width="24" height="24" padding= "0"/></button>
+
+        </div>
+
+        <div class="navButtonsContainer">
+            <a href="/profile" > <Icon icon="mdi:account-circle" width="2.2em" height="2.2em" color ="rgb(255, 255, 255)" /></a>
+            <a href="/cart" ><Icon icon="mdi:cart" width="2em" height="2em" color = "rgb(255, 255, 255)"/></a>
+            
+            <div class="access">
+                <a href="login" class="accessBtn" id="login">Log in</a>
+                <a href="signup" class="accessBtn" id="signup">Sign up</a>
+            </div>
+
+        </div>
+    </div>
+
     <div class="topPanel">
         <div class="topProductDescribtion">
             <h1 style="padding-bottom: 1em; color: white">Macbook Pro M3 Chipset</h1>
@@ -15,7 +40,7 @@
                 Faucibus mattis sodales lobortis ante donec vivamus. Pulvinar per fusce feugiat praesent cursus.
                 Elementum morbi class ridiculus mauris laoreet tempor. Vehicula quam nibh ac feugiat, facilisis eget.
                 Arcu imperdiet id est a sem fringilla neque. Lorem et per purus consectetur augue sit ut potenti inceptos.
-                Lacus nec elementum risus, magna velit lectus porta iaculis.</p>
+                Lacus nec elementum risus, magna velit lectus porta iaculis ldafk.</p>
 
 
         </div>
@@ -29,13 +54,13 @@
     </div>
     
     <div class="mainContent">
-        {#each data.products as product}
+        {#each allProducts as product}
 
         <div class="productContainer">
             <div class="productImage">
-                <img src={product.imageUrls[0]} alt="idk">
+                <img src={product.images[0]} alt="Loadin...">
             </div>
-            <h2>{product.name}</h2>
+            <h2 class="product_name">{product.name}</h2>
             <span class="priceAndCart">
                 <h3>{product.price} LYD</h3>
                 <button on:click={shlal}>Add To Cart</button>
@@ -65,16 +90,141 @@
         display: flex;
         flex-direction: column;
 
+        background-color: #e1e1e1;
+
+    }
+
+    .header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 0 18em;
+
+        background-color: #202020;
+
+    }
+
+    .header .searchBarContainer {
+        background-color: rgb(225, 225, 225);
+        min-height: fit-content;
+        max-width: 70%;
+
+        height: 3.5em;
+        width: 70%;
+
+        border-radius: 10px;
+        border: solid black;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+
+    }
+
+
+    .header .searchBarContainer #searchIcon {
+        padding: 0 0.5em 0 1em;
+    }
+
+    .header .searchBarContainer #searchBar {
+        border: none;
+        background-color: rgb(225, 225, 225);
+
+        width: 80%;
+        height: 90%;
+
+    }
+
+    .header .searchBarContainer #searchBar:focus {
+        outline: none;
+    }
+
+    .header .searchBarContainer .searchButton {
+       
+        cursor: pointer;
+        border-radius: 5px;
+        border: 2px solid black;
+        color: black;
+        background-color:rgb(225, 225, 225);
+        width: 10%;
+        padding: 2px;
+        margin-left: 5px;
+        box-shadow: 0 4px 0 black, 2px 12px 10px transparent;
+		transform: translate(0, -4px);
+		transition: all 0.02s;
+
+    }
+
+    .header .searchBarContainer .searchButton:hover {
+        background-color: rgb(225, 225, 225);
+    }
+
+    .header .searchBarContainer .searchButton:active {
+		transform: translate(0, -1px);
+		box-shadow: 0 1px 0 black, 2px 6px 10px transparent;
+	}
+
+    .navButtonsContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+    }
+
+    .navButtonsContainer a {
+        padding-right: 0.5em;
+
+    }
+
+    .navButtonsContainer .accessBtn {
+        text-decoration: none;
+        border: solid 1px black;
+        padding: 0.1em 0.5em;
+        
+    }
+
+    #login {
+        color: black;
+        background-color: rgb(255, 255, 255);
+
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+
+        padding: 0 0.85em;
+    }
+
+    #signup {
+        color: white;
+        background-color: black;
+        
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 8px;
+
+    }
+
+    .access {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
     }
 
     .topPanel {
-        margin: 0 15em;
+        padding: 0 15em;
         min-height: 25em;
         max-height: 40em;
 
         display: flex;
         flex-direction: row;
 
+        background-color: #202020;
+
+        border-bottom-right-radius: 15px;
+        border-bottom-left-radius: 15px;
 
     }
 
@@ -103,9 +253,7 @@
     }
 
     .mainContent {
-        background-color: rgb(225, 225, 225);
-        border-top-left-radius: 20px;
-        border-top-right-radius: 20px;
+        background-color: #e1e1e1;
         min-height: 100vh;
         height: 100%;
 
@@ -113,14 +261,16 @@
 
         display: grid;
         grid-template-columns: auto auto auto auto;
-        row-gap: 4em;
-        column-gap: 4em;
+        row-gap: 3em;
+        column-gap: 0.1em;
 
     }
 
     .mainContent .productContainer {
         min-height: 18em;
         min-width: 15em;
+
+        max-width: 18em;
 
         width: fit-content;
         
@@ -149,26 +299,25 @@
 
     }
 
+    .mainContent .productContainer .product_name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+    }
+
     .mainContent .productContainer .priceAndCart > button {
         cursor: pointer;
-        border-radius: 5px;
-        border: 2px solid red;
+        border-radius: 3px;
+        border: 2px solid black;
         background-color: white;
-        color: red;
+        color: black;
         padding: 5px 15px;
-        box-shadow: 0 4px 0 red, 2px 12px 10px transparent;
 
         margin-bottom: 0.5em;
     }
     
     .mainContent .productContainer .priceAndCart > button:hover {
         background-color: rgb(225, 225, 225);
-    }
-
-    .mainContent .productContainer .priceAndCart > button:active {
-        transform: translate(0, 2px);
-		box-shadow: 0 1px 0 red, 2px 6px 10px transparent;
-
     }
     
     img {

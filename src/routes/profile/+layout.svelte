@@ -7,11 +7,11 @@
 
         options.forEach((option) => {
             if(option == target) {
-                option.style.color = 'red';
+                option.style.color = 'black';
                 option.style.backgroundColor = '#dcdcdc';
 
             } else {
-                option.style.color = 'black';
+                option.style.color = 'hsl(0, 0%, 43%)';
                 option.style.backgroundColor = '#e6e6e6';
             }
 
@@ -28,9 +28,9 @@
         <h1>User Profile</h1>
 
         <div class="navOptions">
-            <a href="/profile" id="information" on:click={toggleOption} style="color: red; background-color: #e6e6e6"><Icon icon="material-symbols:account-circle" width="24" height="24" /> Information</a>
-            <a href="/profile/orders" id="orders" on:click={toggleOption}><Icon icon="material-symbols:package-2" width="24" height="24" /> Orders</a>
+            <a href="/profile" id="information" on:click={toggleOption} style="color: black; background-color: #e6e6e6"><Icon icon="material-symbols:account-circle" width="24" height="24" /> Information</a>
             <a href="/profile/favorites" id="favorites" on:click={toggleOption}><Icon icon="material-symbols:favorite-rounded" width="24" height="24" /> Favorites</a>
+            <a href="/profile/orders" id="orders" on:click={toggleOption}><Icon icon="material-symbols:package-2" width="24" height="24" /> Orders</a>
             <a href="/profile/contact" id="contact" on:click={toggleOption}><Icon icon="ic:baseline-message" width="24" height="24" /> Contact</a>
 
         </div>    
@@ -51,6 +51,8 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+
+        color: hsl(0, 0%, 43%);
 
     }
 
@@ -91,9 +93,12 @@
 
     }
 
+    h1 {
+        color: black;
+    }
+
     a {
         cursor: pointer;
-        color: black;
         text-decoration: none;
 
         display: block;
@@ -107,7 +112,7 @@
         border-radius: 5px;
         background-color: #dcdcdc;
 
-        color: red;
+        color: black;
 
     }
 
