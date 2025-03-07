@@ -1,12 +1,17 @@
 <script>
+    import { auth } from "$lib/firebase";
+    import { onAuthStateChanged } from "firebase/auth";
     import Icon from '@iconify/svelte';
+
+    let currentUser = "";
+
+    onAuthStateChanged(auth, (user) => {
+        if(user) currentUser = user.displayName;
+    })
+
     export let data;
     let allProducts = data.products;
 
-    function shlal(){
-        console.log(data.products);
-
-    }
 </script>
 
 <main>
@@ -22,12 +27,17 @@
         </div>
 
         <div class="navButtonsContainer">
-            <a href="/profile" > <Icon icon="mdi:account-circle" width="2.2em" height="2.2em" color ="rgb(255, 255, 255)" /></a>
-            <a href="/cart" ><Icon icon="mdi:cart" width="2em" height="2em" color = "rgb(255, 255, 255)"/></a>
+            <a href="/profile" style="margin-left: 1em"> <Icon icon="mdi:account-circle" width="2.2em" height="2.2em" color ="rgb(255, 255, 255)" /></a>
+            <a href="/cart" style="margin-right: 1em"><Icon icon="mdi:cart" width="2em" height="2em" color = "rgb(255, 255, 255)"/></a>
             
             <div class="access">
-                <a href="login" class="accessBtn" id="login">Log in</a>
-                <a href="signup" class="accessBtn" id="signup">Sign up</a>
+                {#if currentUser}
+                    <p style="color:#e1e1e1">Welcome <br> <b>{currentUser}</b></p>
+                {:else}
+                    <a href="login" class="accessBtn" id="login">Log in</a>
+                    <a href="signup" class="accessBtn" id="signup">Sign up</a>
+                {/if}
+                
             </div>
 
         </div>
@@ -63,7 +73,7 @@
             <h2 class="product_name">{product.name}</h2>
             <span class="priceAndCart">
                 <h3>{product.price} LYD</h3>
-                <button on:click={shlal}>Add To Cart</button>
+                <button>Add To Cart</button>
             </span>
         </div>
         {/each}
@@ -99,8 +109,9 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+        line-height: 16px;
 
-        padding: 0 18em;
+        padding: 0 15em;
 
         background-color: #202020;
 
@@ -171,11 +182,6 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-
-    }
-
-    .navButtonsContainer a {
-        padding-right: 0.5em;
 
     }
 

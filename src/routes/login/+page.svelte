@@ -1,20 +1,39 @@
 <script>
+    import { auth } from "$lib/firebase";
+    import { EmailAuthCredential, signInWithEmailAndPassword } from "firebase/auth";
     import Icon from '@iconify/svelte';
     import { goto } from '$app/navigation';
 
     const storeName = "Cosmic";
-    let phoneNumber = "";
+
+    let email = "";
     let password = "";
+
+    let alertMessage = "";
     
-    function sign_in() {
-        if(!phoneNumber || !password) return;
-        else goto("/");
+    async function login() {
+        try {
+            if(!email || !password) {
+                alertMessage = "Fields cannot be empty"
+                return;
+            }
+            const userCredentials = await signInWithEmailAndPassword(auth, email, password);
+            const user = userCredentials.user;
+            if(!user.emailVerified) {
+                alertMessage = "Please verify email before logging in.";
+                return;
+
+            }
+            goto("/");
+
+        } catch (error) {
+            alertMessage = error.message;
+        }
     }
 
     function togglePassword() {
         const field = document.getElementById("password");
         const fieldRepeat = document.getElementById("passwordRepeat");
-        const icon = document.getElementById("togglePasswordButton");
 
         if(field.type == 'password') { 
             field.type = 'text';
@@ -52,8 +71,8 @@
             <div class="lower_container">
                 <div class="field">
                     
-                    <label for="phoneNumber"> <Icon icon="fa6-solid:phone" style="font-size: 1.4em; color: #e1e1e1;"/></label>
-                    <input id="phoneNumber" type="text" placeholder="09X-XXXXXXX" required bind:value={phoneNumber}>
+                    <label for="email"> <Icon icon="fa6-solid:envelope" style="font-size: 1.4em; color: #e1e1e1;"/></label>
+                    <input id="email" type="email" placeholder="Email Address" required bind:value={email}>
                 </div>
                 
                 <div class="field">
@@ -75,7 +94,8 @@
                 
             </div>
             
-            <button on:click={sign_in}>Log in</button>
+            <button on:click={login}>Log in</button>
+            <p style="color: white;">{alertMessage}</p>
             <p>Don't have an account? <a href="/signup">Create a new account</a></p>            
         </div>
         

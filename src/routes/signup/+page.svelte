@@ -1,24 +1,24 @@
 <script>
     import Icon from '@iconify/svelte';
-    import { goto } from '$app/navigation';
+    import { auth } from '$lib/firebase';
+    import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth';
 
     const storeName = "Cosmic";
-    let phoneNumber = "";
 
+    let alertMessage = "";
+    
     let fullName = "";
+
+    let email = "";
+    let phoneNumber = "";
 
     let password = "";
     let passwordRepeat = ""
-    
-    function sign_in() {
-        if(!phoneNumber || !password) return;
-        else goto("/");
-    }
+
 
     function togglePassword() {
         const field = document.getElementById("password");
         const fieldRepeat = document.getElementById("passwordRepeat");
-        const icon = document.getElementById("togglePasswordButton");
 
         if(field.type == 'password') { 
             field.type = 'text';
@@ -33,6 +33,22 @@
         }
     }
 
+    async function signup() {
+        try {
+            const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredentials.user;
+
+            await updateProfile(user, { displayName: fullName});
+
+            sendEmailVerification(user);
+            alertMessage = "A verification link has been sent to your email";
+
+        } catch (error) {
+            alertMessage = error.message;
+            
+        }
+    }
+
 </script>
 
 <main>
@@ -40,7 +56,7 @@
 
     <div class="page">  
         
-        <form class="container">
+        <form class="container" on:submit|preventDefault={signup}>
             
             
             <div class="back_to_store_button"> <a href="/"><Icon icon="fa-solid:store-alt" /> <Icon icon="mdi:keyboard-return" /></a> </div>
@@ -57,12 +73,17 @@
                 <div class="field" style="margin-bottom: 1.5em">
                     
                     <label for="fullName"> <Icon icon="fa6-solid:user" style="font-size: 1.55em; color: #e1e1e1;"/></label>
-                    <input id="phoneNumber" type="text" placeholder="Name and surname" required bind:value={fullName}>
+                    <input id="fullName" type="text" placeholder="Name and surname" required bind:value={fullName}>
+                </div>
+                <div class="field">
+                    
+                    <label for="email"> <Icon icon="fa6-solid:envelope" style="font-size: 1.4em; color: #e1e1e1;"/></label>
+                    <input id="email" type="email" placeholder="Email adress" required bind:value={email}>
                 </div>
                 <div class="field" style="margin-bottom: 1.5em">
                     
                     <label for="phoneNumber"> <Icon icon="fa6-solid:phone" style="font-size: 1.4em; color: #e1e1e1;"/></label>
-                    <input id="phoneNumber" type="text" placeholder="09X-XXXXXXX" required bind:value={phoneNumber}>
+                    <input id="phoneNumber" type="tel" placeholder="09X-XXXXXXX" required bind:value={phoneNumber}>
                 </div>
                 
                 <div class="field">
@@ -75,15 +96,14 @@
                     <label for="passwordRepeat"><Icon icon="fa6-solid:repeat" style="font-size: 1.3em; color: #e1e1e1;" /></label>
                     <input id="passwordRepeat" type="password" placeholder="Re-Enter Password" required bind:value={passwordRepeat}>
 
-                </div>
-
-            
-                
+                </div>   
                 
             </div>
             
-            <button on:click={sign_in} type="submit">Create account</button>
+
+            <button type="submit">Create account</button>
             <p>Already have an account? <a href="/login">Sign in</a></p>
+            <p style="color:white; margin-top: 1em;">{alertMessage}</p>
             <p style="margin-top: 1em">By creating an account you agree to the <a href=" ">Terms of service</a></p>
 
         </form>
@@ -204,7 +224,6 @@
         outline: none;
 
     }
-
 
     button {
         cursor: pointer;

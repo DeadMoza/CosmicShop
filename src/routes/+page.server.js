@@ -19,8 +19,6 @@ export async function load() {
             };
         })
     );
-
-    console.log(products);
     return { products };
 }
 
