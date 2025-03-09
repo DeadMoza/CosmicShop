@@ -4,10 +4,14 @@
     import Icon from '@iconify/svelte';
 
     let currentUser = "";
+    let currentEmail = "";
 
     onAuthStateChanged(auth, (user) => {
-        if(user) currentUser = user.displayName;
-    })
+        if(user) { 
+            currentUser = user.displayName;
+            currentEmail = user.email;
+        }
+    });
 
     export let data;
     let allProducts = data.products;
@@ -27,7 +31,7 @@
         </div>
 
         <div class="navButtonsContainer">
-            <a href="/profile" style="margin-left: 1em"> <Icon icon="mdi:account-circle" width="2.2em" height="2.2em" color ="rgb(255, 255, 255)" /></a>
+            <a href="/{currentEmail}" style="margin-left: 1em"> <Icon icon="mdi:account-circle" width="2.2em" height="2.2em" color ="rgb(255, 255, 255)" /></a>
             <a href="/cart" style="margin-right: 1em"><Icon icon="mdi:cart" width="2em" height="2em" color = "rgb(255, 255, 255)"/></a>
             
             <div class="access">

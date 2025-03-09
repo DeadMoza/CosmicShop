@@ -33,6 +33,29 @@
         }
     }
 
+    async function setNewUser() {
+
+        let formData = new FormData();
+        formData.append("email", email);
+        formData.append("fullName", fullName);
+        formData.append("phoneNumber", phoneNumber);
+
+        try {
+            
+            const response = await fetch('/api/addUser', {
+                method: 'POST',
+                body: formData
+
+            });
+            if (response.ok) {
+                console.log("User created successfully!");
+            }
+        } catch (error) {
+            alertMessage = error.message;
+
+        }
+    }
+
     async function signup() {
         if (!fullName || !fullName.includes(" ") || fullName.trim() == "") {
             alertMessage = "Please enter a valid name!";
@@ -57,6 +80,7 @@
             await updateProfile(user, { displayName: fullName});
 
             sendEmailVerification(user);
+            setNewUser();
             alertMessage = "A verification link has been sent to your email";
 
         } catch (error) {
