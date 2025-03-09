@@ -1,6 +1,6 @@
 <script>
     import { auth } from "$lib/firebase";
-    import { EmailAuthCredential, signInWithEmailAndPassword } from "firebase/auth";
+    import { signInWithEmailAndPassword } from "firebase/auth";
     import Icon from '@iconify/svelte';
     import { goto } from '$app/navigation';
 
@@ -10,11 +10,24 @@
     let password = "";
 
     let alertMessage = "";
+
+    const getErrorMessage = (errorCode) => {
+    const errorMap = {
+        "auth/invalid-credential": "Incorrect email or password", 
+        "auth/user-not-found": "User not found. Please sign up.",
+        "auth/wrong-password": "Incorrect password. Try again.",
+        "auth/too-many-requests": "Too many failed attempts. Try again later.",
+        "auth/network-request-failed": "Network error. Check your connection.",
+        "auth/internal-error": "Something went wrong. Try again later."
+    };
+
+        return errorMap[errorCode] || "An unexpected error occurred.";
+    };
     
     async function login() {
         try {
             if(!email || !password) {
-                alertMessage = "Fields cannot be empty"
+                alertMessage = "Fields cannot be empty!"
                 return;
             }
             const userCredentials = await signInWithEmailAndPassword(auth, email, password);
@@ -27,7 +40,7 @@
             goto("/");
 
         } catch (error) {
-            alertMessage = error.message;
+            alertMessage = getErrorMessage(error.code);
         }
     }
 
@@ -87,7 +100,7 @@
                         <input type="checkbox" id="rememberMe">
                         <label for="rememberMe">Remember Me</label>
                     </div>    
-                    <a href=" ">Forgot your password?</a>
+                    <a href="/login/passwordReset">Forgot your password?</a>
 
                 </div>
                 
@@ -301,8 +314,4 @@
 
     } 
 
-    
-
-    
-    
 </style>

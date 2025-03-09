@@ -34,6 +34,22 @@
     }
 
     async function signup() {
+        if (!fullName || !fullName.includes(" ") || fullName.trim() == "") {
+            alertMessage = "Please enter a valid name!";
+            return;
+        } 
+
+        if(!phoneNumber || phoneNumber.includes(" ") || !phoneNumber.startsWith("09") || phoneNumber.length != 10) {
+            alertMessage = "Please enter a valid phone number!";
+            return;
+        }
+
+        if(password != passwordRepeat) {
+            alertMessage = "Passwords do not match!";
+            return;
+        }
+            
+        
         try {
             const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredentials.user;
@@ -83,7 +99,7 @@
                 <div class="field" style="margin-bottom: 1.5em">
                     
                     <label for="phoneNumber"> <Icon icon="fa6-solid:phone" style="font-size: 1.4em; color: #e1e1e1;"/></label>
-                    <input id="phoneNumber" type="tel" placeholder="09X-XXXXXXX" required bind:value={phoneNumber}>
+                    <input id="phoneNumber" type="tel" placeholder="09X 0000000" required bind:value={phoneNumber}>
                 </div>
                 
                 <div class="field">
@@ -130,9 +146,10 @@
         padding: 0;
         box-sizing: border-box;
         font-family: Arial;
-
+        
 
     }
+
     a:hover {
         color: white;
     }

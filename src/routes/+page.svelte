@@ -109,7 +109,7 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        line-height: 16px;
+        line-height: 17px;
 
         padding: 0 15em;
 
