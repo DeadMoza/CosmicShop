@@ -1,20 +1,20 @@
 <script>
     import Icon from '@iconify/svelte';
 
+    export let data;
+
     function toggleOption(event) {
         const target = event.currentTarget;
         const options = document.querySelectorAll('.navOptions > a');
 
         options.forEach((option) => {
             if(option == target) {
-                option.style.color = 'black';
-                option.style.backgroundColor = '#dcdcdc';
+                option.style.color = 'white';
 
             } else {
                 option.style.color = 'hsl(0, 0%, 43%)';
-                option.style.backgroundColor = '#e6e6e6';
+            
             }
-
         });
     }
 
@@ -24,22 +24,40 @@
 <main>
 <body>
 
-    <div class="optionsContainer">
-        <h1>User Profile</h1>
+    <div class="container">
 
-        <div class="navOptions">
-            <a href="/profile" id="information" on:click={toggleOption} style="color: black; background-color: #e6e6e6"><Icon icon="material-symbols:account-circle" width="24" height="24" /> Information</a>
-            <a href="/profile/favorites" id="favorites" on:click={toggleOption}><Icon icon="material-symbols:favorite-rounded" width="24" height="24" /> Favorites</a>
-            <a href="/profile/orders" id="orders" on:click={toggleOption}><Icon icon="material-symbols:package-2" width="24" height="24" /> Orders</a>
-            <a href="/profile/contact" id="contact" on:click={toggleOption}><Icon icon="ic:baseline-message" width="24" height="24" /> Contact</a>
+        <div class="optionsContainer">
+            <div class="title">
+                <a href="/"><Icon icon="fa6-solid:arrow-left" width="24" height="24" /></a>
+                <h1 style="padding-left: 0.2em">User Profile</h1>
 
-        </div>    
+            </div>
+            
+            <div class="navOptions">
+                <a href="/{data.email}" id="information" on:click={toggleOption}> <Icon icon="fa6-solid:user" width="24" height="24" style="padding-right: 0.5em"/>Information</a>
+                <a href="/{data.email}/favorites" id="favorites" on:click={toggleOption}><Icon icon="fa6-solid:heart" width="24" height="24" style="padding-right: 0.5em"/>Favorites</a>
+                <a href="/{data.email}/orders" id="orders" on:click={toggleOption}><Icon icon="fa6-solid:box" width="24" height="24" style="padding-right: 0.5em"/>Orders</a>
+                <a href="/{data.email}/contact" id="contact" on:click={toggleOption}><Icon icon="fa6-solid:message" width="24" height="24" style="padding-right: 0.5em"/>Contact</a>
+                <a href="/{data.email}/settings" id="settings" on:click={toggleOption}><Icon icon="fa6-solid:gear" width="24" height="24" style="padding-right: 0.5em"/>Settings</a>
+
+                
+            </div>    
+        </div>
+        
+        <div class="selectedOptionContainer">
+            
+            <slot />
+        </div>
+        
     </div>
+        
+    <footer>
 
-    <div class="selectedOptionContainer">
-
-        <slot />
-    </div>
+        <a href=" ">Help</a>
+        <a href=" ">Terms of service</a>
+        <p> &copy; Cosmic Store</p>
+    
+</footer>
 </body>
 </main>
 
@@ -52,21 +70,35 @@
         padding: 0;
         box-sizing: border-box;
 
-        color: hsl(0, 0%, 43%);
+        color: #6e6e6e;
 
     }
 
     body {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-between;
+        min-height: 100vh;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
 
         margin: 1em 18em;
 
     }
 
+    .title {
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+
+    }
+
     .optionsContainer {
-        background-color: #e6e6e6;
+        background-color: #202020;
         flex: 40%;
 
         max-width: 20em;
@@ -82,19 +114,31 @@
         padding: 1em;
     }
 
+    .navOptions {
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+
+        font-size: 1.2em;
+
+    }
+
+    .navOptions > a {
+        display: flex;
+        flex-direction: row;
+
+    }
+
     .selectedOptionContainer {
-        background-color: #e6e6e6;
+        background-color: #202020;
         flex: 60%;
         
-        max-width: 38em;
+        max-width: 30em;
         min-height: 38em;
 
         border-radius: 5px;
 
-    }
-
-    h1 {
-        color: black;
     }
 
     a {
@@ -102,17 +146,26 @@
         text-decoration: none;
 
         display: block;
-
-        font-size: large;
-        padding: 0.3em 0.5em;
         
     }
 
     a:hover {
-        border-radius: 5px;
-        background-color: #dcdcdc;
+        color: white;
 
-        color: black;
+    }
+
+    footer {
+        display: flex;
+        justify-content: space-evenly;
+
+        background-color: #202020;
+        color: #e1e1e1;
+
+        width: 100%;
+        bottom: 0;
+
+        padding: 1rem;
+        
 
     }
 
