@@ -1,9 +1,14 @@
 <script>
     import Icon from '@iconify/svelte';
 
-    
     export let data;
     const user = data.userInfo;
+
+    let city = "";
+    let street = "";
+    let address = "";
+
+    let alertMessage = "";
 
     function editAddress() {
         const userAddress = document.getElementById("userAddress");
@@ -14,12 +19,45 @@
 
     }
 
-    function saveAddress() {
-        const userAddress = document.getElementById("userAddress");
-        const editAddressForm = document.getElementById("editAddressForm");
+    async function saveAddress() {
 
-        userAddress.style = "display: block";
-        editAddressForm.style = "display: none";
+        if(!city.trim() || !street.trim() || !address.trim()) {
+            alertMessage = "Enter a valid address!";
+            return;
+
+        }
+
+
+        const fullAddress = city + ", " + street + " " + address;
+        let formData = new FormData();
+        formData.append("email", data.email);
+        formData.append("address", fullAddress);
+
+        try {
+            const response = await fetch("/api/addAddress", {
+            method: "POST",
+            body: formData
+
+        });
+
+        if (response.ok) {
+            alertMessage = "";
+            const userAddress = document.getElementById("userAddress");
+            const editAddressForm = document.getElementById("editAddressForm");
+
+            userAddress.innerHTML = fullAddress;
+
+            userAddress.style = "display: block";
+            editAddressForm.style = "display: none";
+
+
+        }
+
+        } catch (error) {
+            console.log("An error occured:", error);
+            alertMessage = "An error occured", error;
+
+        }
     }
 
 </script>
@@ -38,8 +76,8 @@
 
         <h3>Address: <button class="editAddress" on:click={editAddress}><Icon icon="fa6-solid:pen-to-square" width="20" height="20" /></button></h3>
         <p id="userAddress">
-            {#if data.address}
-                {data.address}
+            {#if user.address}
+                {user.address}
             {:else}
                 No address.
             {/if}
@@ -47,15 +85,16 @@
         <form action="submit" id="editAddressForm" on:submit|preventDefault={saveAddress}>
             
             <label for="city">City:</label>
-            <input type="text" id="city">
+            <input type="text" id="city" bind:value={city}>
 
             <label for="street">Street:</label>
-            <input type="text" id="street">
+            <input type="text" id="street" bind:value={street}>
 
             <label for="address">Detailed address:</label>
-            <textarea name="address" id="address"></textarea>
+            <textarea name="address" id="address" bind:value={address}></textarea>
 
             <button type="submit" id="saveAddress">Save</button>
+            <p style="color:red">{alertMessage}</p>
         </form>
     </div>
     
@@ -139,10 +178,12 @@
         margin: 2em 10em;
         padding: 0.4em 0;
         cursor: pointer;
+
     }
 
     #editAddressForm {
         display: none;
+        
     }
     
 </style>

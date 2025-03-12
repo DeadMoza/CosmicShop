@@ -4,7 +4,7 @@ import { doc, getDoc } from "firebase/firestore";
 export async function load({ params }) {
     const userID = params.user;
     const userRef = doc(db, "users", userID);
-    console.log(userID);
+
     const userSnapshot = await getDoc(userRef);
     if(userSnapshot.exists()) {
 
