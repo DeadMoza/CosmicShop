@@ -64,6 +64,8 @@
 
 <main>
 <body>
+    <h2 style="text-align: center; margin-top: 0.5em;">Profile Informaiton</h2>
+
     <div class="container">
         <h3>Full Name:</h3>
         <p>{user.fullName}</p>
@@ -94,7 +96,7 @@
             <textarea name="address" id="address" bind:value={address}></textarea>
 
             <button type="submit" id="saveAddress">Save</button>
-            <p style="color:red">{alertMessage}</p>
+            <p style="color:white">{alertMessage}</p>
         </form>
     </div>
     
@@ -106,7 +108,7 @@
 <style>
 
     *{
-        font-family: Arial;
+        font-family: Arial, Helvetica, sans-serif;
         padding: 0;
         margin: 0;
         box-sizing: border-box;
@@ -183,7 +185,7 @@
 
     #editAddressForm {
         display: none;
-        
+
     }
     
 </style>
