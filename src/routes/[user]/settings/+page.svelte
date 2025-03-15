@@ -1,6 +1,6 @@
 <script>
     import { auth } from "$lib/firebase";
-    import { deleteUser, signOut } from "firebase/auth";
+    import { signOut, deleteUser } from "firebase/auth";
     import { goto } from "$app/navigation";
 
     export let data;
@@ -10,14 +10,12 @@
 
         try {
             const user = auth.currentUser;
-            const userEmail = data.email;
-
-            console.log(userEmail);
+            const userID = data.userID;
 
             alertMessage = "Deleting account...";
             const response = await fetch("/api/deleteUser", {
                     method: "DELETE",
-                    body: JSON.stringify(userEmail)
+                    body: JSON.stringify(userID)
     
                 });
 
@@ -39,11 +37,11 @@
     async function signOutUser() {
         await signOut(auth).then(() => {
             console.log("Signed out user!");
-            goto("/signup");
+            goto("/login");
 
         }).catch((error) => {
             alertMessage = "An error occured:", error.message;
-            console.log("An error occured while signing in");
+            console.log("An error occured while signing out");
         });
     }
 

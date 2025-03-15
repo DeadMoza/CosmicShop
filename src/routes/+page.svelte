@@ -3,13 +3,15 @@
     import { onAuthStateChanged } from "firebase/auth";
     import Icon from '@iconify/svelte';
 
-    let currentUser = "";
-    let currentEmail = "";
+    let userID = "";
+    let userName = "";
+    let userEmail = "";
 
     onAuthStateChanged(auth, (user) => {
-        if(user) { 
-            currentUser = user.displayName;
-            currentEmail = user.email;
+        if(user) {
+            userID = user.uid; 
+            userName = user.displayName;
+            userEmail = user.email;
         }
     });
 
@@ -31,12 +33,12 @@
         </div>
 
         <div class="navButtonsContainer">
-            <a href="/{currentEmail}" style="margin-left: 1em"> <Icon icon="mdi:account-circle" width="2.2em" height="2.2em" color ="rgb(255, 255, 255)" /></a>
+            <a href="/{userID}" style="margin-left: 1em"> <Icon icon="mdi:account-circle" width="2.2em" height="2.2em" color ="rgb(255, 255, 255)" /></a>
             <a href="/cart" style="margin-right: 1em"><Icon icon="mdi:cart" width="2em" height="2em" color = "rgb(255, 255, 255)"/></a>
             
             <div class="access">
-                {#if currentUser}
-                    <p style="color:#e1e1e1">Welcome <br> <b>{currentUser}</b></p>
+                {#if userName}
+                    <p style="color:#e1e1e1">Welcome <br> <b>{userName}</b></p>
                 {:else}
                     <a href="login" class="accessBtn" id="login">Log in</a>
                     <a href="signup" class="accessBtn" id="signup">Sign up</a>

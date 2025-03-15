@@ -8,13 +8,15 @@ export async function POST({ request }) {
               
         const formData = await request.formData();
 
+        const userID = formData.get("userID");
         const email = formData.get("email");
         const fullName = formData.get("fullName");
         const phoneNumber = formData.get("phoneNumber");
     
-        const docRef = doc(db, "users", email);
+        const docRef = doc(db, "users", userID);
         await setDoc(docRef, {
             fullName: fullName,
+            email: email,
             phoneNumber: phoneNumber
         
         });

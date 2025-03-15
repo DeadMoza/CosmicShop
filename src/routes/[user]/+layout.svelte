@@ -34,11 +34,11 @@
             </div>
             
             <div class="navOptions">
-                <a href="/{data.email}" id="information" on:click={toggleOption}> <Icon icon="fa6-solid:user" width="24" height="24" style="padding-right: 0.5em"/>Information</a>
-                <a href="/{data.email}/favorites" id="favorites" on:click={toggleOption}><Icon icon="fa6-solid:heart" width="24" height="24" style="padding-right: 0.5em"/>Favorites</a>
-                <a href="/{data.email}/orders" id="orders" on:click={toggleOption}><Icon icon="fa6-solid:box" width="24" height="24" style="padding-right: 0.5em"/>Orders</a>
-                <a href="/{data.email}/contact" id="contact" on:click={toggleOption}><Icon icon="fa6-solid:message" width="24" height="24" style="padding-right: 0.5em"/>Contact</a>
-                <a href="/{data.email}/settings" id="settings" on:click={toggleOption}><Icon icon="fa6-solid:gear" width="24" height="24" style="padding-right: 0.5em"/>Settings</a>
+                <a href="/{data.userID}" id="information" on:click={toggleOption}> <Icon icon="fa6-solid:user" width="24" height="24" style="padding-right: 0.5em"/>Information</a>
+                <a href="/{data.userID}/favorites" id="favorites" on:click={toggleOption}><Icon icon="fa6-solid:heart" width="24" height="24" style="padding-right: 0.5em"/>Favorites</a>
+                <a href="/{data.userID}/orders" id="orders" on:click={toggleOption}><Icon icon="fa6-solid:box" width="24" height="24" style="padding-right: 0.5em"/>Orders</a>
+                <a href="/{data.userID}/contact" id="contact" on:click={toggleOption}><Icon icon="fa6-solid:message" width="24" height="24" style="padding-right: 0.5em"/>Contact</a>
+                <a href="/{data.userID}/settings" id="settings" on:click={toggleOption}><Icon icon="fa6-solid:gear" width="24" height="24" style="padding-right: 0.5em"/>Settings</a>
 
                 
             </div>    

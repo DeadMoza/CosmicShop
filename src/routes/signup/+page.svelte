@@ -33,9 +33,10 @@
         }
     }
 
-    async function setNewUser() {
+    async function setNewUser(userID) {
 
         let formData = new FormData();
+        formData.append("userID", userID);
         formData.append("email", email);
         formData.append("fullName", fullName);
         formData.append("phoneNumber", phoneNumber);
@@ -76,11 +77,14 @@
         try {
             const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredentials.user;
+            const userID = user.uid;
+
+            alertMessage = "Please wait...";
 
             await updateProfile(user, { displayName: fullName});
 
-            sendEmailVerification(user);
-            setNewUser();
+            await sendEmailVerification(user);
+            setNewUser(userID);
             alertMessage = "A verification link has been sent to your email";
 
         } catch (error) {

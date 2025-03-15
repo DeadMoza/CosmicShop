@@ -30,7 +30,7 @@
 
         const fullAddress = city + ", " + street + " " + address;
         let formData = new FormData();
-        formData.append("email", data.email);
+        formData.append("userID", data.userID);
         formData.append("address", fullAddress);
 
         try {
@@ -71,7 +71,7 @@
         <p>{user.fullName}</p>
         
         <h3>Email Address:</h3>
-        <p>{data.email}</p>
+        <p>{user.email}</p>
 
         <h3>Phone Number:</h3>
         <p>{user.phoneNumber}</p>

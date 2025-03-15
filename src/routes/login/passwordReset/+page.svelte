@@ -2,7 +2,6 @@
     import { auth } from "$lib/firebase";
     import { sendPasswordResetEmail } from "firebase/auth";
     import Icon from '@iconify/svelte';
-    import { goto } from '$app/navigation';
 
     let email = "";
     let alertMessage = "";
