@@ -134,8 +134,13 @@
         background-color: #202020;
         flex: 60%;
         
+        min-width: 30em;
         max-width: 30em;
+        
         min-height: 38em;
+        max-height: 43em;
+
+        overflow: auto;
 
         border-radius: 5px;
 

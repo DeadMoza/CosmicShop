@@ -7,6 +7,8 @@
     let userName = "";
     let userEmail = "";
 
+    let alertMessage = "";
+
     onAuthStateChanged(auth, (user) => {
         if(user) {
             userID = user.uid; 
@@ -17,6 +19,24 @@
 
     export let data;
     let allProducts = data.products;
+
+    async function addToFavorites(productID) {
+        try {
+            const response = await fetch("/api/addToFavorites", {
+                method: "POST",
+                body: JSON.stringify({ userID, productID })
+
+            });
+
+            if(response.ok) {
+                alertMessage = "Product added to favorites";
+
+            }
+        } catch (error) {
+            alertMessage = "Error occured while adding to favorites", error;
+            console.log(alertMessage);
+        }
+    }
 
 </script>
 
@@ -56,7 +76,7 @@
                 Faucibus mattis sodales lobortis ante donec vivamus. Pulvinar per fusce feugiat praesent cursus.
                 Elementum morbi class ridiculus mauris laoreet tempor. Vehicula quam nibh ac feugiat, facilisis eget.
                 Arcu imperdiet id est a sem fringilla neque. Lorem et per purus consectetur augue sit ut potenti inceptos.
-                Lacus nec elementum risus, magna velit lectus porta iaculis ldafk.</p>
+                Lacus nec elementum risus, magna velit lectus porta iaculis ldafk.{alertMessage}</p>
 
 
         </div>
@@ -73,8 +93,11 @@
         {#each allProducts as product}
 
         <div class="productContainer">
+            <div class="addToFavoritesButton">
+                <button on:click|preventDefault={() => {addToFavorites(product.id)}}><Icon icon="fa6-regular:heart"/></button>
+            </div>
             <div class="productImage">
-                <img src={product.images[0]} alt="Loadin...">
+                <img src={product.images[0]} alt="Loading...">
             </div>
             <h2 class="product_name">{product.name}</h2>
             <span class="priceAndCart">
@@ -285,9 +308,27 @@
         max-width: 18em;
 
         width: fit-content;
+        position: relative;
         
 
     }
+
+    .mainContent .productContainer .addToFavoritesButton {
+        position: absolute;
+
+        top: 10px;
+        right: 10px;
+    }
+
+    .mainContent .productContainer .addToFavoritesButton > button {
+        background: none;
+        border: none;
+        cursor: pointer;
+
+        font-size: 1.5em;
+        color: #ff8c9f;
+    }
+
 
     .mainContent .productContainer .productImage {
         background-color: white;
