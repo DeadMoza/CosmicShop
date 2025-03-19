@@ -10,9 +10,9 @@ export async function POST({ request }) {
         console.log("The product id is", productID);
 
         const docRef = doc(db, "favorites", userID);
-        const docSnapshot = getDoc(docRef);
+        const docSnapshot = await getDoc(docRef);
 
-        if ((await docSnapshot).exists) {
+        if ((docSnapshot.exists())) {
             await updateDoc(docRef, {
                 products: arrayUnion(productID)
 

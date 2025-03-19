@@ -32,12 +32,14 @@
             }
             const userCredentials = await signInWithEmailAndPassword(auth, email, password);
             const user = userCredentials.user;
+            const userID = user.uid;
+
             if(!user.emailVerified) {
                 alertMessage = "Please verify email before logging in.";
                 return;
 
             }
-            goto("/");
+            goto(`/${userID}`);
 
         } catch (error) {
             alertMessage = getErrorMessage(error.code);

@@ -103,7 +103,6 @@
         <form class="container" on:submit|preventDefault={signup}>
             
             
-            <div class="back_to_store_button"> <a href="/"><Icon icon="fa-solid:store-alt" /> <Icon icon="mdi:keyboard-return" /></a> </div>
             <div class="upper_container">
                 
                 <img src="../../CosmicLogo.png" alt="cosmic logo"> 
@@ -217,17 +216,6 @@
         text-align: center;
     }
 
-    .back_to_store_button {
-
-        position: absolute;
-        align-self: flex-start;
-
-        margin: 0.5em;
-
-        width: 1.5em;
-        height: 1.5em;
-    }
-
 
     img {
         width :180px;
@@ -329,10 +317,6 @@
         text-decoration: none;
         color: #e1e1e1;
 
-    }
-    
-    .back_to_store_button a {        
-        font-size: 1.5em;
     }
 
     a:hover {

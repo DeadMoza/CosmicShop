@@ -5,7 +5,7 @@ export async function load({ params }) {
     try {
         let result = [];
 
-        const userID = params.user;
+        const userID = params.userID;
 
         const docRef = doc(db, "favorites", userID);
         const docSnapshot = await getDoc(docRef);
@@ -23,7 +23,6 @@ export async function load({ params }) {
                 
                 result.push(docObject);
             }
-            console.log(result);
             return {
                 result
             };

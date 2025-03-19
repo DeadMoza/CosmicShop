@@ -28,17 +28,17 @@
 
         <div class="optionsContainer">
             <div class="title">
-                <a href="/"><Icon icon="fa6-solid:arrow-left" width="24" height="24" /></a>
+                <a href="/{data.userID}"><Icon icon="fa6-solid:arrow-left" width="24" height="24" /></a>
                 <h1 style="padding-left: 0.2em">User Profile</h1>
 
             </div>
             
             <div class="navOptions">
-                <a href="/{data.userID}" id="information" on:click={toggleOption}> <Icon icon="fa6-solid:user" width="24" height="24" style="padding-right: 0.5em"/>Information</a>
-                <a href="/{data.userID}/favorites" id="favorites" on:click={toggleOption}><Icon icon="fa6-solid:heart" width="24" height="24" style="padding-right: 0.5em"/>Favorites</a>
-                <a href="/{data.userID}/orders" id="orders" on:click={toggleOption}><Icon icon="fa6-solid:box" width="24" height="24" style="padding-right: 0.5em"/>Orders</a>
-                <a href="/{data.userID}/contact" id="contact" on:click={toggleOption}><Icon icon="fa6-solid:message" width="24" height="24" style="padding-right: 0.5em"/>Contact</a>
-                <a href="/{data.userID}/settings" id="settings" on:click={toggleOption}><Icon icon="fa6-solid:gear" width="24" height="24" style="padding-right: 0.5em"/>Settings</a>
+                <a href="/{data.userID}/profile" id="information" on:click={toggleOption}> <Icon icon="fa6-solid:user" width="24" height="24" style="padding-right: 0.5em"/>Information</a>
+                <a href="/{data.userID}/profile/favorites" id="favorites" on:click={toggleOption}><Icon icon="fa6-solid:heart" width="24" height="24" style="padding-right: 0.5em"/>Favorites</a>
+                <a href="/{data.userID}/profile/orders" id="orders" on:click={toggleOption}><Icon icon="fa6-solid:box" width="24" height="24" style="padding-right: 0.5em"/>Orders</a>
+                <a href="/{data.userID}/profile/contact" id="contact" on:click={toggleOption}><Icon icon="fa6-solid:message" width="24" height="24" style="padding-right: 0.5em"/>Contact</a>
+                <a href="/{data.userID}/profile/settings" id="settings" on:click={toggleOption}><Icon icon="fa6-solid:gear" width="24" height="24" style="padding-right: 0.5em"/>Settings</a>
 
                 
             </div>    

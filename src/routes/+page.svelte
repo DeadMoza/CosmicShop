@@ -1,41 +1,14 @@
 <script>
-    import { auth } from "$lib/firebase";
-    import { onAuthStateChanged } from "firebase/auth";
     import Icon from '@iconify/svelte';
-
-    let userID = "";
-    let userName = "";
-    let userEmail = "";
-
+    
     let alertMessage = "";
-
-    onAuthStateChanged(auth, (user) => {
-        if(user) {
-            userID = user.uid; 
-            userName = user.displayName;
-            userEmail = user.email;
-        }
-    });
 
     export let data;
     let allProducts = data.products;
 
-    async function addToFavorites(productID) {
-        try {
-            const response = await fetch("/api/addToFavorites", {
-                method: "POST",
-                body: JSON.stringify({ userID, productID })
+    async function addToCart() {
+        alertMessage = "Please sign in first";
 
-            });
-
-            if(response.ok) {
-                alertMessage = "Product added to favorites";
-
-            }
-        } catch (error) {
-            alertMessage = "Error occured while adding to favorites", error;
-            console.log(alertMessage);
-        }
     }
 
 </script>
@@ -52,21 +25,13 @@
 
         </div>
 
-        <div class="navButtonsContainer">
-            <a href="/{userID}" style="margin-left: 1em"> <Icon icon="mdi:account-circle" width="2.2em" height="2.2em" color ="rgb(255, 255, 255)" /></a>
-            <a href="/cart" style="margin-right: 1em"><Icon icon="mdi:cart" width="2em" height="2em" color = "rgb(255, 255, 255)"/></a>
+        
+        <div class="access">      
+            <a href="login" class="accessBtn" id="login">Log in</a>
+            <a href="signup" class="accessBtn" id="signup">Sign up</a>
             
-            <div class="access">
-                {#if userName}
-                    <p style="color:#e1e1e1">Welcome <br> <b>{userName}</b></p>
-                {:else}
-                    <a href="login" class="accessBtn" id="login">Log in</a>
-                    <a href="signup" class="accessBtn" id="signup">Sign up</a>
-                {/if}
-                
-            </div>
-
         </div>
+
     </div>
 
     <div class="topPanel">
@@ -93,16 +58,13 @@
         {#each allProducts as product}
 
         <div class="productContainer">
-            <div class="addToFavoritesButton">
-                <button on:click|preventDefault={() => {addToFavorites(product.id)}}><Icon icon="fa6-regular:heart"/></button>
-            </div>
             <div class="productImage">
                 <img src={product.images[0]} alt="Loading...">
             </div>
             <h2 class="product_name">{product.name}</h2>
             <span class="priceAndCart">
                 <h3>{product.price} LYD</h3>
-                <button>Add To Cart</button>
+                <button on:click|preventDefault={() => {addToCart()}}>Add To Cart</button>
             </span>
         </div>
         {/each}
@@ -131,6 +93,10 @@
 
         background-color: #e1e1e1;
 
+    }
+
+    button {
+        cursor: pointer;
     }
 
     .header {
@@ -207,19 +173,6 @@
 		box-shadow: 0 1px 0 black, 2px 6px 10px transparent;
 	}
 
-    .navButtonsContainer {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-
-    }
-
-    .navButtonsContainer .accessBtn {
-        text-decoration: none;
-        border: solid 1px black;
-        padding: 0.1em 0.5em;
-        
-    }
 
     #login {
         color: black;
@@ -311,22 +264,6 @@
         position: relative;
         
 
-    }
-
-    .mainContent .productContainer .addToFavoritesButton {
-        position: absolute;
-
-        top: 10px;
-        right: 10px;
-    }
-
-    .mainContent .productContainer .addToFavoritesButton > button {
-        background: none;
-        border: none;
-        cursor: pointer;
-
-        font-size: 1.5em;
-        color: #ff8c9f;
     }
 
 
