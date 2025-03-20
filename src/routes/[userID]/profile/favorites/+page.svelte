@@ -29,28 +29,33 @@
 <main>
 <body>
     <h2 style="text-align: center; margin-top: 0.5em;">Favorite Items</h2>
-    {#each favorites as product, index}
+    {#if favorites.length != 0}
+        {#each favorites as product, index}
         <div class="container">
-            <div class="imageAndInfo">    
-                <div class="productImage">
-                    <img src={product.images[0]} alt="Loading...">
-                </div>
-                <div class="info">
-                    <h3>{product.name}</h3>
-                    <div>
-                        <p>{product.price} LYD</p>
-                        <p>{product.color}</p>
-                        
-                        <button id="addToCartButton" style="margin-top: 0.5em;">Add to cart</button>
+                <div class="imageAndInfo">    
+                    <div class="productImage">
+                        <img src={product.images[0]} alt="Loading...">
                     </div>
-                </div>
+                    <div class="info">
+                        <h3>{product.name}</h3>
+                        <div>
+                            <p>{product.price} LYD</p>
+                            <p>{product.color}</p>
+                            
+                            <button id="addToCartButton" style="margin-top: 0.5em;">Add to cart</button>
+                        </div>
+                    </div>
                     
+                </div>
+                
+                <button id="removeFromFavoritesButton" on:click|preventDefault={() => {removeFromFavorites(product.id, index)}}>X</button>
+                
             </div>
+            {/each}
 
-            <button id="removeFromFavoritesButton" on:click|preventDefault={() => {removeFromFavorites(product.id, index)}}>X</button>
-
-        </div>
-    {/each}
+            {:else} <p style="padding-top: 1em; text-align:center;">No favorite items.</p>
+        {/if}
+            
 
 
 </body>

@@ -51,6 +51,7 @@
                     cartProducts = [...cartProducts, newCartProduct];
                 }
                 cartTotal += parseInt(productPrice);
+                cartOpen = true;
                 console.log("Products in cart:",cartProducts);
 
             }
@@ -78,7 +79,7 @@
             }
 
         } catch (error) {
-            
+            alertMessage = "An error occured while trying to remove a cart item", error;
         }
     }
 
@@ -170,7 +171,7 @@
             <div class="tempCartTotal">
                 {#if cartTotal}
                     <p>Total: <b>{cartTotal} LYD</b></p>
-                    <button>Checkout<Icon icon="fa6-solid:arrow-right"/></button>
+                    <button on:click={goto(`/${userID}/cart`)}>Checkout<Icon icon="fa6-solid:arrow-right"/></button>
                 {/if}
             </div>
         </div>

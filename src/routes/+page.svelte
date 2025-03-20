@@ -1,6 +1,17 @@
 <script>
     import Icon from '@iconify/svelte';
+    import { auth } from "$lib/firebase";
+    import { onAuthStateChanged } from 'firebase/auth';
+    import { goto } from "$app/navigation";
     
+
+    onAuthStateChanged(auth, (user) => {
+        if(user) {
+            const userID = user.uid;
+            goto(`/${userID}`);
+        }
+    });
+
     let alertMessage = "";
 
     export let data;
