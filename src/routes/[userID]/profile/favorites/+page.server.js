@@ -29,7 +29,9 @@ export async function load({ params }) {
         
         } else {
             console.log("No items found in favorites list");
-            return;
+            return {
+                result
+            };
         }
     } catch (error) {
         console.log("Could not fetch favorite products", error);

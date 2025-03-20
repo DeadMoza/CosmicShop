@@ -151,12 +151,6 @@
                                 </div>
                                 
                             </div>
-                        <div class="tempCartCounter">
-                            <button class="counter"><Icon icon="fa6-solid:minus"/></button>
-                            <h3>3</h3>
-                            <button class="counter"><Icon icon="fa6-solid:plus"/></button>
-                            
-                        </div>
                         
                         <button on:click|preventDefault={() => {removeFromCart(product.id, index, product.price)}} id="removeFromTempCartButton" style="color: red; font-size: 1.1em;"><Icon icon="fa6-solid:trash-can"/></button>
                         
@@ -344,7 +338,7 @@
         top: 6em;
 
         min-width: 20em;
-        max-width: 25em;
+        max-width: 24em;
         width: 100%;
 
         min-height: 10em;
@@ -400,6 +394,11 @@
         flex-direction: row;
         justify-content: space-between;
         margin-bottom: 0.5em;
+        padding-left: 0.5em;
+        padding-right: 1em;
+
+        border-radius: 5px;
+        background-color: #e1e1e1;
 
 
     }
@@ -420,26 +419,11 @@
     }
 
     .tempCartProductImage {
-        background-color: #e1e1e1;
         border-radius: 5px;
 
         width: 4em;
         height: 4em;
 
-    }
-
-    .tempCartCounter {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-
-        column-gap: 0.8em;
-    }
-
-    .counter {
-        background: none;
-        border: none;
     }
 
     .tempCartProduct > button {

@@ -24,6 +24,16 @@
             console.log("Error removing from favorites", error);
     }
     }
+
+    async function addToCart(productID) {
+        const response = await fetch("/api/addToCart", {
+                method: "POST",
+                body: JSON.stringify({ userID, productID })
+
+            });
+
+            if(response.ok) alertMessage = "Added to cart!";
+    }
 </script>
 
 <main>
@@ -42,7 +52,7 @@
                             <p>{product.price} LYD</p>
                             <p>{product.color}</p>
                             
-                            <button id="addToCartButton" style="margin-top: 0.5em;">Add to cart</button>
+                            <button on:click={() => {addToCart(product.id)}} id="addToCartButton" style="margin-top: 0.5em;">Add to cart</button>
                         </div>
                     </div>
                     
