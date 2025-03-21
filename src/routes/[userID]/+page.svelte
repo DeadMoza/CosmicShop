@@ -199,9 +199,11 @@
             <div class="addToFavoritesButton">
                 <button on:click|preventDefault={() => {addToFavorites(product.id)}}><Icon icon="fa6-regular:heart"/></button>
             </div>
-            <div class="productImage">
-                <img src={product.images[0]} alt="Loading...">
-            </div>
+            <a href="/products/{product.id}">
+                <div class="productImage">
+                    <img src={product.images[0]} alt="Loading...">
+                </div>
+            </a>
             <h2 class="product_name">{product.name}</h2>
             <span class="priceAndCart">
                 <h3>{product.price} LYD</h3>
