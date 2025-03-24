@@ -18,7 +18,7 @@
     let allProducts = data.products;
 
     async function addToCart() {
-        alertMessage = "Please sign in first";
+        goto("/login");
 
     }
 

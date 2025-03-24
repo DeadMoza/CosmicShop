@@ -1,11 +1,20 @@
 <script>
     import Icon from "@iconify/svelte";
+    import { goto } from "$app/navigation";
 
     export let data;
 
-    let alertMessage = "";
+    const userID = data.userID;
+    const userInfo = data.userInfo;
     let cartProducts = data.cartProducts;
     let cartPrice = data.cartPrice;
+    
+    let fullName = userInfo.fullName;
+    let phoneNumber = userInfo.phoneNumber;
+    let email = userInfo.email;
+    let address = userInfo.address;
+
+    let alertMessage = "";
 
     let cartProductsArray = [];
     for (let cartProduct of cartProducts) {
@@ -17,6 +26,49 @@
         };
 
         cartProductsArray.push(productObject);
+    }
+
+    async function confirmOrder() {
+
+            let products = [];
+            for(let product of cartProductsArray) {
+                const productObject = {
+                    id: product.id,
+                    price: product.price,
+                    purchaseQuantity: product.purchaseQuantity,
+                    totalPrice: product.cartPrice,
+
+                }
+
+                products.push(productObject);
+            }
+
+            const formData = new FormData();
+            formData.append("fullName", fullName);
+            formData.append("phoneNumber", phoneNumber);
+            formData.append("email", email);
+            formData.append("address", address);
+            formData.append("userID", userID);
+
+            formData.append("products", JSON.stringify(products));
+
+            try {
+                const response = await fetch("/api/confirmOrder", {
+                    method: "POST",
+                    body: formData,
+
+                });
+
+                if(response.ok) {
+                    alertMessage = "Order placed, You will receive an email shortly.";
+                    goto("/");
+                    
+                }
+            } catch (error) {
+                alertMessage = "An error occured, please try again later.", error;
+            }
+
+        
     }
 
     function increment(index, productPrice) {
@@ -105,6 +157,22 @@
     </div>
 
     <div class="addressContainer">
+        <h1 style="text-align: center; padding-bottom: 0.5em;">Confirm Order</h1>
+
+        <form class= "orderForm">
+            <div style="display: flex; justify-content: space-between">
+                <input type="text" placeholder="Full Name" style="width: 45%; padding: 0.3em;" bind:value={fullName} required>
+                <input type="tel" placeholder="Phone Number" style="width: 45%; padding: 0.3em;" bind:value={phoneNumber} required>
+            </div>
+            <input type="email" placeholder="Email Address" bind:value={email} required>
+            <textarea name="address" id="address" rows="5" placeholder="Full Address" bind:value={address} required></textarea>
+            <div class="orderButton">
+                <h2>{cartPrice} LYD</h2>
+                <button on:click={confirmOrder}>Confirm</button>
+
+            </div>
+
+        </form>
 
     </div>
 
@@ -147,6 +215,7 @@
 
     .addressContainer {
         flex: 40%;
+        position: relative;
 
         min-height: 20em;
 
@@ -251,6 +320,38 @@
     .total {
         text-align: end;
         padding: 1em;
+    }
+
+    .orderForm {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1em;
+
+    }
+
+    .orderForm > input {
+        padding: 0.3em;
+    }
+
+    #address {
+        resize: none;
+        padding: 0.3em;
+    }
+
+    .orderButton {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+
+    }
+
+    .orderButton > button {
+        margin-top: 0.5em;
+        width: 9em;
+        height: 2em;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
     }
 
 </style>
