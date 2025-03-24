@@ -1,5 +1,5 @@
 import { db } from "$lib/firebase";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, doc, addDoc, deleteDoc } from "firebase/firestore";
 import { json } from "@sveltejs/kit";
 
 export async function POST({ request }) {
@@ -24,6 +24,10 @@ export async function POST({ request }) {
             products: products,
 
         });
+
+        const cartRef = doc(db, "carts", userID);
+
+        await deleteDoc(cartRef);
 
         return json({message: "Successfully made a new order."});
 
