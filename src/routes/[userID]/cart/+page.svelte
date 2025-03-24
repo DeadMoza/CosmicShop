@@ -28,6 +28,7 @@
         cartProductsArray.push(productObject);
     }
 
+
     async function confirmOrder() {
 
             let products = [];
@@ -49,6 +50,7 @@
             formData.append("email", email);
             formData.append("address", address);
             formData.append("userID", userID);
+            formData.append("totalPrice", cartPrice);
 
             formData.append("products", JSON.stringify(products));
 
