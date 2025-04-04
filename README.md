@@ -22,6 +22,7 @@ Made with:
 
 
 - Product Display: Products are displayed in an attractive, easy-to-navigate grid.
+
 ![productsPreviewImage](static/mainPreview.png)
 
 - Responsive Design: The website is fully responsive, working seamlessly across all devices (desktop, tablet, mobile).
@@ -29,11 +30,13 @@ Made with:
 - Search & Filters: Search for products based on categories, brands, price ranges, and more.
 
 - Users can construct a wishlist of desired items to be purchased in the future.
+
 ![favoritesPreview](static/profilePreview.png)
 
 - Checkout Process: A streamlined checkout system with order summary and payment integration.
 
 - Shopping Cart: Users can add/remove items to/from their shopping cart.
+
 ![cartPreview](static/cartPreview.png)
 
 ## Usage
